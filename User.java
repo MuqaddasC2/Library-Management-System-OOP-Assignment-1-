@@ -1,18 +1,23 @@
+// User.java
+// User class represents library users
+
 import java.util.ArrayList;
 
 public class User {
-    private int userID;
-    private String name;
-    private String contactInfo;
-    private ArrayList<Book> borrowedBooks;
+    private int userID;                     // Unique identifier for the user
+    private String name;                    // Name of the user
+    private String contactInfo;             // Contact information of the user
+    private ArrayList<Book> borrowedBooks;  // List of books borrowed by the user
 
+    // Constructor to initialize a User object
     public User(int userID, String name, String contactInfo) {
         this.userID = userID;
         this.name = name;
         this.contactInfo = contactInfo;
-        this.borrowedBooks = new ArrayList<>();
+        this.borrowedBooks = new ArrayList<>();     // Initialize an empty list of borrowed books
     }
 
+    // Getter and setter methods for User attributes
     public int getUserID() {
         return userID;
     }
@@ -41,6 +46,7 @@ public class User {
         this.borrowedBooks = b;
     }
 
+    // toString method for displaying User information
     @Override
     public String toString() {
         return "User {" +

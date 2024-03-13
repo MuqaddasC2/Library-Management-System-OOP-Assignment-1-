@@ -1,13 +1,18 @@
+// LibraryManagementSystem.java
+// LibraryManagementSystem class serves as the entry point for the program
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LibraryManagementSystem {
-    private static Library library;
-    private static Scanner scanner = new Scanner(System.in);
+    private static Library library;                             // Instance of the Library class
+    private static Scanner scanner = new Scanner(System.in);    // Scanner for user input
 
+    // Main method - Entry point of the Library Management System
     public static void main(String[] args) {
         library = new Library();
 
+        // Display menu and execute user choices in a loop until the user chooses to exit
         System.out.println("\nWelcome to Library Management System");
         int choice;
         do {
@@ -16,10 +21,12 @@ public class LibraryManagementSystem {
             executeChoice(choice);
         } while (choice != 7);
 
+        // Save data to file before exiting
         library.saveDataToFile();
         System.out.println("Exiting Library Management System. Data saved.");
     }
 
+    // Methods for displaying menu, getting user choice, and executing user choices
     private static void displayMenu() {
         System.out.println("\nSystem Menu:");
         System.out.println("1. Add Book");
@@ -70,6 +77,7 @@ public class LibraryManagementSystem {
         }
     }
 
+    // Methods for adding books, users, displaying books, checking out and returning books, and searching
     private static void addBook() {
         System.out.print("Enter Book ID: ");
         int bookID = scanner.nextInt();
@@ -166,6 +174,7 @@ public class LibraryManagementSystem {
         }
     }
 
+    // Additional methods for finding users and books
     private static User findUser(int userID) {
         for (User user : library.getUsers()) {
             if (user.getUserID() == userID) {

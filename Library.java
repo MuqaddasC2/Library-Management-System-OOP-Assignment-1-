@@ -1,25 +1,30 @@
+// Library.java
+// Library class manages the collection of books and users
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Library {
-    private ArrayList<Book> books;
-    private ArrayList<User> users;
-    private final String dataFilePath = "library_data.txt";
-    private boolean dataLoaded;
+    private ArrayList<Book> books;                              // Collection of books in the library
+    private ArrayList<User> users;                              // Collection of users in the library
+    private final String dataFilePath = "library_data.txt";     // File path for data persistence
+    private boolean dataLoaded;                                 // Flag indicating whether data has been loaded
     
-
+    // Constructor to initialize a Library object
     public Library() {
         this.books = new ArrayList<>();
         this.users = new ArrayList<>();
         this.dataLoaded = false;
 
+        // Load data from file if not already loaded
         if (!dataLoaded) {
             loadDataFromFile();
             dataLoaded = true;
         }
     }
 
+    // Getter methods for books and users
     public ArrayList<Book> getBooks() {
         return books;
     }
@@ -28,6 +33,7 @@ public class Library {
         return users;
     }
 
+     // Methods to add new books and users, check out and return books, and search for books
     public void addBook(Book book) {
         int bookID = book.getBookID();
         boolean bookExists = books.stream().anyMatch(b -> b.getBookID() == bookID);
@@ -40,6 +46,7 @@ public class Library {
         }
     }
     
+
     public void addUser(User user) {
         int userID = user.getUserID();
         boolean userExists = users.stream().anyMatch(u -> u.getUserID() == userID);
@@ -94,6 +101,7 @@ public class Library {
         return result;
     }
 
+    // Methods for file-based data persistence, loading and saving data from/to a file
     public void saveDataToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(dataFilePath))) {
             // Save books

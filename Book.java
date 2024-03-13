@@ -1,18 +1,22 @@
+// Book.java
+// Book class represents individual books in the library
 public class Book {
-    private int bookID;
-    private String title;
-    private String author;
-    private String genre;
-    private boolean availability;
+    private int bookID;             // Unique identifier for the book
+    private String title;           // Title of the book
+    private String author;          // Author of the book
+    private String genre;           // Genre of the book
+    private boolean availability;   // Availability status of the book
 
+    // Constructor to initialize a Book object
     public Book (int bookID, String title, String author, String genre) {
         this.bookID = bookID;
         this.title = title;
         this.author = author;
         this.genre = genre;
-        this.availability = true;
+        this.availability = true;   // Newly added books are available by default
     }
 
+    // Getter and setter methods for Book attributes
     public int getBookID() {
         return bookID;
     }
@@ -48,6 +52,7 @@ public class Book {
         this.availability = availability;
     }
 
+    // toString method for displaying Book information
     @Override
     public String toString() {
         return "Book {" +
