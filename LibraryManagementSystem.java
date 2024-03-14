@@ -19,7 +19,7 @@ public class LibraryManagementSystem {
             displayMenu();
             choice = getUserChoice();
             executeChoice(choice);
-        } while (choice != 7);
+        } while (choice != 9);
 
         // Save data to file before exiting
         library.saveDataToFile();
@@ -32,10 +32,12 @@ public class LibraryManagementSystem {
         System.out.println("1. Add Book");
         System.out.println("2. Add User");
         System.out.println("3. Display Books");
-        System.out.println("4. Check Out Book");
-        System.out.println("5. Return Book");
-        System.out.println("6. Search Book by Title or Author");
-        System.out.println("7. Exit");
+        System.out.println("4. Display Users");
+        System.out.println("5. Show Available Books");
+        System.out.println("6. Borrow Book");
+        System.out.println("7. Return Book");
+        System.out.println("8. Search Book by Title or Author");
+        System.out.println("9. Exit");
         System.out.print("Enter your choice: ");
     }
 
@@ -43,9 +45,9 @@ public class LibraryManagementSystem {
         int choice;
         try {
             choice = scanner.nextInt();
-            scanner.nextLine(); // consume the newline character
+            scanner.nextLine();
         } catch (Exception e) {
-            choice = -1; // invalid choice
+            choice = -1;
         }
         return choice;
     }
@@ -62,15 +64,21 @@ public class LibraryManagementSystem {
                 displayBooks();
                 break;
             case 4:
-                checkOutBook();
+                displayUsers();
                 break;
             case 5:
-                returnBook();
+                showAvailableBooks();
                 break;
             case 6:
-                searchBooks();
+                checkOutBook();
                 break;
             case 7:
+                returnBook();
+                break;
+            case 8:
+                searchBooks();
+                break;
+            case 9:
                 break;
             default:
                 System.out.println("Invalid choice. Please enter a valid option.");
@@ -81,7 +89,7 @@ public class LibraryManagementSystem {
     private static void addBook() {
         System.out.print("Enter Book ID: ");
         int bookID = scanner.nextInt();
-        scanner.nextLine(); // consume the newline character
+        scanner.nextLine();
 
         System.out.print("Enter Title: ");
         String title = scanner.nextLine();
@@ -99,7 +107,7 @@ public class LibraryManagementSystem {
     private static void addUser() {
         System.out.print("Enter User ID: ");
         int userID = scanner.nextInt();
-        scanner.nextLine(); // consume the newline character
+        scanner.nextLine();
 
         System.out.print("Enter Name: ");
         String name = scanner.nextLine();
@@ -118,14 +126,30 @@ public class LibraryManagementSystem {
         }
     }
 
+    private static void displayUsers() {
+        System.out.println("\nLibrary Users:");
+        for (User user : library.getUsers()) {
+            System.out.println(user);
+        }
+    }
+    
+    private static void showAvailableBooks() {
+        System.out.println("\nAvailable Books:");
+        for (Book book : library.getBooks()) {
+            if (book.getAvailability()) {
+                System.out.println(book);
+            }
+        }
+    }
+
     private static void checkOutBook() {
         System.out.print("Enter User ID: ");
         int userID = scanner.nextInt();
-        scanner.nextLine(); // consume the newline character
+        scanner.nextLine();
 
         System.out.print("Enter Book ID to check out: ");
         int bookID = scanner.nextInt();
-        scanner.nextLine(); // consume the newline character
+        scanner.nextLine();
 
         User user = findUser(userID);
         Book book = findBook(bookID);
@@ -140,11 +164,11 @@ public class LibraryManagementSystem {
     private static void returnBook() {
         System.out.print("Enter User ID: ");
         int userID = scanner.nextInt();
-        scanner.nextLine(); // consume the newline character
+        scanner.nextLine();
 
         System.out.print("Enter Book ID to return: ");
         int bookID = scanner.nextInt();
-        scanner.nextLine(); // consume the newline character
+        scanner.nextLine();
 
         User user = findUser(userID);
         Book book = findBook(bookID);
